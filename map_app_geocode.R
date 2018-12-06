@@ -1,13 +1,4 @@
-# csv <- read_csv("/Users/pgordon/ownCloud/Commuter Map/Geocoded_address.csv")
-# csv <- csv$search
-# csv <- csv[1:5]
-# write.table(csv, file="input", row.names=F, col.names=F, quote=F)
-# t <- read.table('/Users/pgordon/ownCloud/Commuter Map/Map_App/input', quote="", sep="\n")
-# v <- as.vector(t$V1)
-# r <- mp_geocode(v)
-# pnt <- mp_get_points(r)
-# df <- structure(dplyr::bind_cols(search = pnt$address, as.data.frame(do.call(rbind, pnt$pnt)), address = pnt$address_google), names = c("search", "lon", "lat", "address"))
-
+#Copyright (c) 2018 Columbus Collaboratory LLC.  All Rights Reserved.
 
 library(shiny)
 library(shinydashboard)
@@ -69,13 +60,13 @@ ui <- dashboardPage(
   ),
   dashboardBody(
     tags$head(HTML("<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src='https://www.googletagmanager.com/gtag/js?id=UA-126191069-1'></script>
+<script async src='https://www.googletagmanager.com/gtag/js?id=<UA GOOGLE ANALYTICS ID>'></script>
                    <script>
                    window.dataLayer = window.dataLayer || [];
                    function gtag(){dataLayer.push(arguments);}
                    gtag('js', new Date());
                    
-                   gtag('config', 'UA-126191069-1');
+                   gtag('config', '<UA-GOOGLE ANALYTICS ID>');
                    </script>
                    ")),
     tabItems(
@@ -449,7 +440,7 @@ server <- function(input, output, session) {
     start.time <- Sys.time()
     base <- "https://maps.googleapis.com/maps/api/"
     endpoint <- "geocode/json"
-    key <- "<YOUR API KEY>"
+    key <- "<YOUR GOOGLE GEOCODE API KEY>"
     for(i in seq_len(nrow(addresses))){
       call1 <- paste(base,endpoint,"?","address","=", addresses[i,], "&key=", key, sep="")
       getResult <- GET(URLencode(call1))
